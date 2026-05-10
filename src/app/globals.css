@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #0a0a0a;
+  --color-foreground: #f2f0e9;
+  --color-soft-black: #111111;
+  --color-surface: #141414;
+  --color-elevated: #1a1a1a;
+  --color-accent: #e8d5b5;
+  --color-accent-muted: #c4b094;
+  --color-warm-gray: #8a8580;
+  --color-muted: #5c5854;
+  --color-dim: #3d3a37;
+  --font-heading: var(--font-space-grotesk);
+  --font-body: var(--font-inter);
+}
+
+@layer base {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    background: #0a0a0a;
+    color: #f2f0e9;
+    font-family: var(--font-inter), system-ui, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: rgba(232, 213, 181, 0.2);
+    color: #ffffff;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-space-grotesk), system-ui, sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+  }
+}
+
+@layer utilities {
+  /* Editorial typography scale - dramatic contrasts */
+  .display-hero {
+    font-size: clamp(3.5rem, 10vw, 9rem);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    font-weight: 500;
+  }
+
+  .display-xl {
+    font-size: clamp(2.75rem, 6vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+  }
+
+  .display-lg {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+  }
+
+  .display-md {
+    font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+  }
+
+  .body-xl {
+    font-size: clamp(1.125rem, 1.4vw, 1.375rem);
+    line-height: 1.75;
+    color: #8a8580;
+    font-weight: 400;
+  }
+
+  .body-lg {
+    font-size: clamp(1rem, 1.1vw, 1.125rem);
+    line-height: 1.7;
+    color: #8a8580;
+    font-weight: 400;
+  }
+
+  .body-md {
+    font-size: clamp(0.875rem, 0.95vw, 1rem);
+    line-height: 1.65;
+    color: #5c5854;
+    font-weight: 400;
+  }
+
+  .label {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #5c5854;
+  }
+
+  .label-accent {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #c4b094;
+  }
+
+  /* Surface treatments */
+  .bg-surface { background: #141414; }
+  .bg-elevated { background: #1a1a1a; }
+
+  .border-subtle { border-color: rgba(242, 240, 233, 0.06); }
+  .border-hover { border-color: rgba(242, 240, 233, 0.12); }
+
+  /* Film grain texture overlay */
+  .grain::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    opacity: 0.035;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px;
+  }
+
+  /* Paper texture for cards */
+  .texture-paper {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.03'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 100px;
+  }
+
+  /* Physical depth shadows - layered, realistic */
+  .shadow-physical {
+    box-shadow:
+      0 0.5px 0.8px rgba(0, 0, 0, 0.25),
+      0 1.6px 2.6px rgba(0, 0, 0, 0.18),
+      0 4px 6.5px rgba(0, 0, 0, 0.12),
+      0 10px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .shadow-physical-hover {
+    box-shadow:
+      0 0.8px 1.2px rgba(0, 0, 0, 0.3),
+      0 2.5px 4px rgba(0, 0, 0, 0.22),
+      0 6px 10px rgba(0, 0, 0, 0.15),
+      0 16px 28px rgba(0, 0, 0, 0.1);
+  }
+
+  .shadow-depth {
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.4),
+      0 4px 8px rgba(0, 0, 0, 0.3),
+      0 12px 24px rgba(0, 0, 0, 0.2),
+      0 32px 64px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Accent glow - warm, restrained */
+  .glow-warm {
+    box-shadow: 0 0 80px rgba(232, 213, 181, 0.06);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 60px rgba(232, 213, 181, 0.15);
+  }
+
+  /* Card treatment with physical presence */
+  .card {
+    background: #141414;
+    border: 1px solid rgba(242, 240, 233, 0.05);
+    border-radius: 16px;
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .card:hover {
+    border-color: rgba(242, 240, 233, 0.1);
+    transform: translateY(-2px);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.3),
+      0 8px 16px rgba(0, 0, 0, 0.2),
+      0 24px 48px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Editorial accent line */
+  .accent-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(196, 176, 148, 0.5) 50%, transparent 100%);
+  }
+
+  .accent-line-left {
+    height: 1px;
+    background: linear-gradient(90deg, rgba(196, 176, 148, 0.5) 0%, transparent 100%);
+  }
+}
+
+/* Organic animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(0.3deg); }
+  66% { transform: translateY(-4px) rotate(-0.2deg); }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes drift {
+  0% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(10px) translateY(-5px); }
+  50% { transform: translateX(-5px) translateY(10px); }
+  75% { transform: translateX(5px) translateY(5px); }
+  100% { transform: translateX(0) translateY(0); }
+}
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar - minimal */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3d3a37; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
